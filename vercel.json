@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    {
+      "source": "/polymarket-api/:path*",
+      "destination": "https://gamma-api.polymarket.com/:path*"
+    }
+  ]
+}

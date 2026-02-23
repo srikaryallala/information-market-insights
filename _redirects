@@ -1,0 +1,7 @@
+# Netlify edge proxy rules.
+# Polymarket's Gamma API blocks cross-origin requests, so we proxy it here.
+# Manifold Markets is CORS-open and is called directly (no proxy needed).
+#
+# Docs: https://docs.netlify.com/routing/redirects/rewrites-proxies/
+
+/polymarket-api/*  https://gamma-api.polymarket.com/:splat  200

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Live high-probability finance and politics prediction markets from Polymarket." />
+  <title>Market Insights — Polymarket Finance &amp; Politics Tracker</title>
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+
+  <!-- ── Header ── -->
+  <header>
+    <div class="header-inner">
+
+      <div class="logo">
+        <div class="logo-icon">M</div>
+        <div class="logo-text">
+          <h1>Market Insights</h1>
+          <span class="tagline">Live prediction markets</span>
+        </div>
+      </div>
+
+      <div class="controls">
+
+        <!-- Category toggles -->
+        <div class="cat-filters" role="group" aria-label="Category filters">
+          <button class="filter-btn active" data-category="finance" aria-pressed="true">Finance</button>
+          <button class="filter-btn active" data-category="politics" aria-pressed="true">Politics</button>
+        </div>
+
+        <!-- Probability threshold slider -->
+        <div class="threshold-wrap">
+          <label for="threshold">Min&nbsp;probability:&nbsp;<span id="threshold-display">70%</span></label>
+          <input type="range" id="threshold" min="0" max="99" value="70" step="1"
+                 aria-label="Minimum probability threshold" />
+        </div>
+
+        <!-- Sort order -->
+        <select id="sort-select" aria-label="Sort markets by">
+          <option value="probability">Highest Probability</option>
+          <option value="volume">Highest Volume</option>
+          <option value="expiry">Soonest Expiry</option>
+        </select>
+
+      </div>
+    </div>
+
+    <!-- Progress bar showing time until next refresh -->
+    <div class="refresh-bar" aria-hidden="true">
+      <div id="progress-bar"></div>
+    </div>
+  </header>
+
+  <!-- ── Main content ── -->
+  <main>
+
+    <div class="status-bar">
+      <span id="market-count">Loading markets…</span>
+      <span id="last-updated"></span>
+    </div>
+
+    <!-- Market cards -->
+    <div id="markets-grid" class="markets-grid" role="list" aria-live="polite" aria-label="Market listings">
+    </div>
+
+    <!-- Loading state -->
+    <div id="loading" class="overlay-state">
+      <div class="spinner" aria-hidden="true"></div>
+      <p>Fetching live markets…</p>
+    </div>
+
+    <!-- Error state -->
+    <div id="error" class="overlay-state hidden">
+      <span class="state-icon" aria-hidden="true">⚠</span>
+      <p>Could not reach the Polymarket API.</p>
+      <p class="state-sub">Showing cached data if available. Will retry automatically.</p>
+    </div>
+
+    <!-- Empty state -->
+    <div id="empty" class="overlay-state hidden">
+      <span class="state-icon" aria-hidden="true">◎</span>
+      <p>No markets match the current filters.</p>
+      <p class="state-sub">Try lowering the probability threshold or enabling more categories.</p>
+    </div>
+
+  </main>
+
+  <!-- ── Footer ── -->
+  <footer>
+    <div class="footer-inner">
+      <span>Data from <a href="https://polymarket.com" target="_blank" rel="noopener noreferrer">Polymarket</a></span>
+      <span id="countdown" class="live-dot">Auto-refreshes every 2 minutes</span>
+    </div>
+  </footer>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
