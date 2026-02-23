@@ -8,19 +8,11 @@
 
 // ── Configuration ─────────────────────────────────────────────
 
-/**
- * Polymarket's Gamma API doesn't send CORS headers, so:
- *  • file://  → route through corsproxy.io (public relay)
- *  • HTTP(S)  → use the /polymarket-api edge-rewrite (Netlify / Vercel)
- */
-function resolveApiBase() {
-  return window.location.protocol === 'file:'
-    ? 'https://corsproxy.io/?https://gamma-api.polymarket.com'
-    : '/polymarket-api';
-}
-
+// Polymarket's Gamma API blocks all cross-origin requests.
+// corsproxy.io is a public CORS relay that adds the missing header.
+// It works from file://, GitHub Pages, Netlify, Vercel — everywhere.
 const CONFIG = {
-  API_BASE:          resolveApiBase(),
+  API_BASE:          'https://corsproxy.io/?https://gamma-api.polymarket.com',
   MARKET_LIMIT:      100,
   REFRESH_INTERVAL:  2 * 60 * 1000,
   DEFAULT_THRESHOLD: 70,

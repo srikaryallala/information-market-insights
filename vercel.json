@@ -1,4 +1,5 @@
 {
+  "_comment": "Optional self-hosted proxy. app.js uses corsproxy.io by default so this rewrite is not required. To use it instead, set CONFIG.API_BASE = '/polymarket-api' in app.js.",
   "rewrites": [
     {
       "source": "/polymarket-api/:path*",
